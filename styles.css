@@ -1,0 +1,106 @@
+/* Estilos gerais do corpo */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;  /* Cor de fundo mais escura para contraste */
+    color: #fff;  /* Texto em branco para contraste */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container principal do quiz */
+.quiz-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #1e1e1e;  /* Fundo mais suave */
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    margin-top: 350px; /* Adiciona mais espaço acima do container */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);  /* Sombra sutil */
+}
+
+/* Estilo da imagem das bandeiras */
+#flag-image {
+    width: 350px;  /* Tamanho moderado */
+    height: auto;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;  /* Bordas arredondadas para suavizar a imagem */
+}
+
+/* Estilo para o campo de entrada de texto */
+input[type="text"] {
+    padding: 15px 20px;
+    font-size: 18px;
+    margin-top: 20px;
+    border: 2px solid #444;  /* Bordas mais suaves */
+    color: #fff;
+    background-color: #333;
+    border-radius: 5px;  /* Bordas arredondadas */
+    width: 100%;  /* Ocupa a largura total disponível */
+    box-sizing: border-box;  /* Garante que o padding não afete o tamanho total */
+}
+
+/* Estilo dos botões */
+button {
+    padding: 12px 25px;
+    margin: 15px 0;
+    background-color: #5560ea;  /* Cor de fundo suave e moderna */
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;  /* Transição suave */
+}
+
+button:hover {
+    background-color: #4b54d6;  /* Efeito de hover com cor mais escura */
+}
+
+/* Estilo do botão de alternância */
+button#toggle-button {
+    background-color: transparent;
+    border: 2px solid #fff;
+    padding: 8px 20px;
+    font-size: 14px;
+}
+
+button#toggle-button:hover {
+    background-color: #555;  /* Efeito de hover para o botão de alternância */
+}
+
+/* Estilos para os botões de continente */
+#continent-buttons button {
+    margin-top: 10px;
+    background-color: #444;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#continent-buttons button:hover {
+    background-color: #666;
+}
+
+/* Estilos para o rótulo de feedback */
+#feedback-label {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #4caf50;  /* Cor verde para feedback de sucesso */
+}
+
+/* Estilo dos contadores de acertos e erros */
+#correct-label,
+#incorrect-label {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #ffffff;
+}
