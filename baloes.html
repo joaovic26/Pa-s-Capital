@@ -1,0 +1,298 @@
+Aqui está o **código corrigido** com as melhorias para garantir que a música de fundo funcione corretamente, mesmo com as restrições de reprodução automática dos navegadores:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz Aniversário</title>
+  <style>
+    /* Fundo do site */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(to bottom, #6dd5ed, #f7d9c4);
+    }
+
+    /* Tela de carregamento */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 100;
+    }
+
+    .loading-text {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar-container {
+      width: 80%;
+      height: 20px;
+      background: #444;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: #4caf50;
+      transition: width 0.3s ease;
+    }
+
+    /* Mensagem de aniversário */
+    .birthday-message {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      line-height: 1.5;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+
+    /* Botão de presente */
+    .present-button {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 120px;
+      background: url('./presente.png') no-repeat center;
+      background-size: contain;
+      cursor: pointer;
+      animation: bounce 1.2s infinite;
+      z-index: 10;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-20px);
+      }
+    }
+
+    /* Mensagem do botão */
+    .present-message {
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #696969;
+      font-size: 1.3rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+
+    /* Slideshow */
+    .slideshow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .slideshow-container img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      animation: fadeSlide 16s infinite;
+    }
+
+    .slideshow-container img:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .slideshow-container img:nth-child(2) {
+      animation-delay: 4s;
+    }
+
+    .slideshow-container img:nth-child(3) {
+      animation-delay: 8s;
+    }
+
+    .slideshow-container img:nth-child(4) {
+      animation-delay: 12s;
+    }
+
+    .slideshow-container img:nth-child(5) {
+      animation-delay: 16s;
+    }
+
+    .slideshow-container img:nth-child(6) {
+      animation-delay: 20s;
+    }
+
+    .slideshow-container img:nth-child(7) {
+      animation-delay: 24s;
+    }
+
+    .slideshow-container img:nth-child(8) {
+      animation-delay: 28s;
+    }
+
+    @keyframes fadeSlide {
+      0%, 25% {
+        opacity: 1;
+      }
+      30%, 100% {
+        opacity: 0;
+      }
+    }
+
+    /* GIF dos Minions */
+    .minions-gif {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      width: 150px;
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+  <!-- Tela de carregamento -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-text">Carregando...</div>
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </div>
+
+  <!-- Slideshow de Fotos -->
+  <div class="slideshow-container">
+    <img src="./fotosfamilia/1.jpg">
+    <img src="./fotosfamilia/2.jpg">
+    <img src="./fotosfamilia/3.jpg">
+    <img src="./fotosfamilia/4.jpg">
+    <img src="./fotosfamilia/5.jpg">
+    <img src="./fotosfamilia/6.jpg">
+    <img src="./fotosfamilia/7.jpg">
+    <img src="./fotosfamilia/8.jpg">
+  </div>
+
+  <!-- Mensagem de Feliz Aniversário -->
+  <div class="birthday-message">
+    🎉 Feliz Aniversário, Pai! 🎉 <br> Obrigado por nos ensinar tanto! Te amo muito!
+  </div>
+
+  <!-- Botão de presente -->
+  <div class="present-button" onclick="redirectToMain()"></div>
+  <div class="present-message">Clique para ver seu presente!</div>
+
+  <!-- GIF dos Minions -->
+  <img src="./minions.gif" alt="Minions" class="minions-gif">
+
+  <!-- Música de Fundo -->
+  <audio id="backgroundMusic" loop>
+    <source src="./musica.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+
+  <script>
+    const assets = [
+      './fotosfamilia/1.jpg',
+      './fotosfamilia/2.jpg',
+      './fotosfamilia/3.jpg',
+      './fotosfamilia/4.jpg',
+      './fotosfamilia/5.jpg',
+      './fotosfamilia/6.jpg',
+      './fotosfamilia/7.jpg',
+      './fotosfamilia/8.jpg',
+      './musica.mp3',
+      './minions.gif'
+    ];
+
+    const progressBar = document.getElementById('progressBar');
+    const loadingScreen = document.getElementById('loadingScreen');
+    let loadedAssets = 0;
+
+    const preloadAsset = (url) => {
+      return new Promise((resolve) => {
+        if (url.endsWith('.mp3')) {
+          const audio = new Audio(url);
+          audio.oncanplaythrough = resolve;
+          audio.onerror = resolve;
+        } else {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = resolve;
+          img.src = url;
+        }
+      });
+    };
+
+    Promise.all(
+      assets.map((url) =>
+        preloadAsset(url).then(() => {
+          loadedAssets++;
+          progressBar.style.width = `${(loadedAssets / assets.length) * 100}%`;
+        })
+      )
+    ).then(() => {
+      loadingScreen.style.display = "none";
+      const backgroundMusic = document.getElementById("backgroundMusic");
+      backgroundMusic
+        .play()
+        .catch(() => {
+          const playButton = document.createElement("button");
+          playButton.innerText = "Clique para ativar a música";
+          playButton.style.position = "fixed";
+          playButton.style.top = "50%";
+          playButton.style.left = "50%";
+          playButton.style.transform = "translate(-50%, -50%)";
+          playButton.style.zIndex = "200";
+          playButton.style.padding = "10px 20px";
+          playButton.style.fontSize = "1.2rem";
+          playButton.style.backgroundColor = "#4caf50";
+          playButton.style.color = "white";
+          playButton.style.border = "none";
+          playButton.style.borderRadius = "5px";
+          document.body.appendChild(playButton);
+
+          playButton.addEventListener("click", () => {
+            backgroundMusic.play();
+            playButton.remove();
+          });
+        });
+    });
+
+    function redirectToMain() {
+      window.location.href = "main.html";
+    }
+  </script>
+</body>
+</html>
+```
